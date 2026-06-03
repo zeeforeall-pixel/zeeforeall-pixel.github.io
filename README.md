@@ -14,7 +14,7 @@ npx serve
 
 ## Deploy (GitHub Pages)
 Pushes to `main` auto-deploys to:
-**https://zeeforeall-pixel.github.io/dear-sidi/**
+**https://zeeforeall-pixel.github.io/**
 
 ## Structure
 - `index.html` — single-file app
