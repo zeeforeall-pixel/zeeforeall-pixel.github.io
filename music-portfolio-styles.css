@@ -1,0 +1,380 @@
+/* ═══════════════════════════════════════════════════════════════
+   MUSIC PORTFOLIO COMPONENT STYLES
+   Integrated into dear.sidi single-file HTML
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Global: Body background layer with distortion */
+body.mp-background-active::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: var(--mp-bg-image);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
+  filter: brightness(0.5) saturate(1.4) hue-rotate(5deg);
+  animation: distort 8s ease-in-out infinite;
+  transition: opacity 1.2s ease;
+}
+
+/* Distortion animation will be applied via JS inline styles */
+
+/* Don't add overlay - let native backgrounds show through */
+
+/* Container */
+.music-portfolio-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  padding: 40px 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: transparent;
+  backdrop-filter: none;
+  transition: backdrop-filter 0.6s ease, background 0.6s ease;
+  z-index: 1;
+}
+
+/* When background is active, add subtle backdrop blur */
+.music-portfolio-container:has(.portfolio-main.has-active) {
+  backdrop-filter: none;
+  background: rgba(26, 26, 26, 0.3);
+}
+
+/* Main Portfolio Area */
+.portfolio-main {
+  position: relative;
+  z-index: 2;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Project List */
+.project-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.project-item {
+  display: grid;
+  grid-template-columns: 1.5fr 2fr 1fr 1.5fr 80px;
+  gap: 20px;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(212, 165, 116, 0.1);
+  cursor: pointer;
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  opacity: 1;
+  pointer-events: auto;
+  touch-action: manipulation;
+}
+
+.project-item:hover {
+  background: rgba(212, 165, 116, 0.05);
+  border-bottom-color: rgba(212, 165, 116, 0.3);
+  transform: translateX(8px);
+}
+
+.project-item.active {
+  background: rgba(212, 165, 116, 0.08);
+  border-bottom-color: rgba(212, 165, 116, 0.4);
+  transform: translateX(12px);
+}
+
+.project-item.idle {
+  transition: opacity 0.1s ease;
+}
+
+/* Project Data Columns */
+.project-data {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--fg2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.project-item:hover .project-data,
+.project-item.active .project-data {
+  color: var(--fg0);
+}
+
+.project-data.track-number {
+  font-size: 11px;
+  color: var(--muted);
+  text-align: center;
+  font-weight: 600;
+}
+
+.project-item.active .project-data.track-number {
+  color: var(--accent);
+}
+
+.project-data.artist {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--fg0);
+  padding: 2px 8px;
+  transition: background 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+              border-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+              color 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Yellow highlight on hover/active */
+.project-item:hover .project-data.artist,
+.project-item.active .project-data.artist {
+  background: rgb(255, 215, 0);
+  color: #000;
+  border-left: 2px solid rgb(255, 215, 0);
+}
+
+.project-data.album {
+  font-weight: 500;
+}
+
+.project-data.category,
+.project-data.label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--muted);
+  padding: 2px 6px;
+  border-radius: 2px;
+  transition: background 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+              color 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Yellow highlight on hover/active */
+.project-item:hover .project-data.category,
+.project-item:hover .project-data.label,
+.project-item.active .project-data.category,
+.project-item.active .project-data.label {
+  background: rgb(255, 215, 0);
+  color: #000;
+}
+
+.project-data.year {
+  text-align: right;
+  font-size: 12px;
+  color: var(--muted);
+  padding: 2px 6px;
+  transition: background 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+              color 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Yellow highlight on hover/active */
+.project-item:hover .project-data.year,
+.project-item.active .project-data.year {
+  background: rgb(255, 215, 0);
+  color: #000;
+}
+
+/* Hover Text Animation */
+.hover-text {
+  display: inline-block;
+}
+
+/* Background Image - changes entire website background behind content */
+.background-image {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1.0);
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  z-index: 1;
+  pointer-events: none;
+  filter: brightness(0.5) saturate(1.4) hue-rotate(5deg) contrast(1.1);
+  animation: distortion 8s ease-in-out infinite;
+  will-change: transform, opacity, filter;
+}
+
+/* Corner Elements */
+.corner-elements {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.corner-item {
+  position: absolute;
+  font-size: 11px;
+  color: var(--fg3);
+  pointer-events: auto;
+}
+
+.corner-item.top-left {
+  top: 24px;
+  left: 24px;
+}
+
+.corner-item.top-right {
+  top: 24px;
+  right: 24px;
+}
+
+.corner-item.bottom-left {
+  bottom: 24px;
+  left: 24px;
+}
+
+.corner-item.bottom-right {
+  bottom: 24px;
+  right: 24px;
+}
+
+.corner-square {
+  width: 12px;
+  height: 12px;
+  border: 1px solid var(--accent);
+  border-radius: 2px;
+}
+
+.corner-item a {
+  color: var(--fg3);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.corner-item a:hover {
+  color: var(--accent);
+}
+
+/* Time Display */
+.time-blink {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Distortion animation for background image */
+@keyframes distortion {
+  0%, 100% {
+    filter: brightness(0.5) saturate(1.4) hue-rotate(5deg) contrast(1.1);
+  }
+  25% {
+    filter: brightness(0.48) saturate(1.5) hue-rotate(8deg) contrast(1.15);
+  }
+  50% {
+    filter: brightness(0.52) saturate(1.3) hue-rotate(2deg) contrast(1.05);
+  }
+  75% {
+    filter: brightness(0.49) saturate(1.45) hue-rotate(6deg) contrast(1.12);
+  }
+}
+
+/* Screen Reader Only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .project-item {
+    grid-template-columns: 1.5fr 2fr 1fr;
+    gap: 12px;
+    padding: 16px 18px;
+  }
+  
+  .project-data.label,
+  .project-data.year {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .music-portfolio-container {
+    padding: 20px 12px;
+    min-height: auto;
+  }
+  .project-item {
+    /* Show: num, artist, album (category/label/year hidden) */
+    grid-template-columns: 32px 1fr 1.2fr;
+    gap: 10px;
+    padding: 14px 12px;
+    min-height: 56px;
+    -webkit-tap-highlight-color: rgba(212, 165, 116, 0.2);
+  }
+  .project-item:active {
+    background: rgba(212, 165, 116, 0.15);
+    transform: scale(0.98);
+  }
+  .project-data.category,
+  .project-data.label,
+  .project-data.year {
+    display: none;
+  }
+  .project-data {
+    font-size: 12px;
+  }
+  .project-data.artist {
+    font-size: 13px;
+  }
+  .corner-item {
+    font-size: 10px;
+  }
+  .corner-item.top-left,
+  .corner-item.top-right,
+  .corner-item.bottom-left,
+  .corner-item.bottom-right {
+    top: 16px;
+    right: 16px;
+    bottom: 16px;
+    left: 16px;
+  }
+}
+@media (max-width: 480px) {
+  .music-portfolio-container {
+    padding: 16px 8px;
+  }
+  .project-item {
+    /* Show: num, artist only (album/category/label/year hidden) */
+    grid-template-columns: 28px 1fr;
+    gap: 8px;
+    padding: 12px 10px;
+    min-height: 48px;
+    -webkit-tap-highlight-color: rgba(212, 165, 116, 0.2);
+  }
+  .project-item:active {
+    background: rgba(212, 165, 116, 0.15);
+    transform: scale(0.98);
+  }
+  .project-data.album,
+  .project-data.category,
+  .project-data.label,
+  .project-data.year {
+    display: none;
+  }
+  .project-data.artist {
+    font-size: 12px;
+  }
+}
